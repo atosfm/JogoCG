@@ -219,6 +219,9 @@ public:
 
 		glPopMatrix();
 	}
+	// Método que verifica a colisão entre dois objetos
+	// *n1 - Ponteiro que aponta para um Objeto qualquer que herde ou seja da classe naveGenerica
+	// *n2 - Ponteiro que aponta para um Objeto qualquer que herde ou seja da classe naveGenerica
 	static bool verificaColisao(naveGenerica *n1, naveGenerica *n2){
 		if ((n1->getXC() + n1->getBoundingBoxL() < n2->getXC()) //D1<E2
 			||(n1->getXC() > n2->getXC() + n2->getBoundingBoxL()) //E1>D2
@@ -229,5 +232,16 @@ public:
 		else{
 			return true;
 		}
-	}	
+	}
+	// Método que verifica a colisão entre inúmeros objetos
+	// *n1 - Ponteiro que aponta para um Objeto qualquer que herde ou seja da classe naveGenerica
+	static bool verificaColisaoGeral(naveGenerica *n1, naveGenerica naves[], int nIndices){		
+		for (int x = 0; x < nIndices; x++){			
+			if (verificaColisao(n1, &naves[x])){
+				return true;
+			}
+		}
+		return false;
+		
+	}
 };

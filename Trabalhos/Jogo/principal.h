@@ -23,7 +23,7 @@ protected:
 	bool fullscreenON = false;	// Indica se o fullscreen está ou não ativado
 	bool anima = false;			// Indica se haverá ou não animação
 	
-	naveGenerica *n1, *n2,*n3,*naves[200];
+	naveGenerica *n1, *n2,*n3,naves[200];
 	
 	//bool keyStates[256] = { false };	//
 	//GLfloat cor[3] = { 0.3f, 0.6f, 0.3f };
@@ -43,7 +43,8 @@ public:
 		np = n;
 		ni1 = ini;
 		ni2 = ini2;
-		naves[0] = &ini;
+		naves[0] = ini;
+		naves[1] = ini2;
 		n1 = &n;
 		n2 = &ini;
 		n3 = &ini2;
@@ -52,8 +53,8 @@ public:
 	void pressionarTecla(unsigned char key){
 		GLfloat xc = np.getXC();
 		GLfloat yc = np.getYC();
-		GLfloat xci = np.getXC();
-		GLfloat yci = np.getYC();
+		GLfloat xci = xc;
+		GLfloat yci = yc;
 		switch (key) {
 		case 'W':
 		case 'w':
@@ -88,9 +89,10 @@ public:
 			break;
 		}
 		np.setCoord(xc, yc);
-		if ((naveGenerica::verificaColisao(&np, &ni1)) || (naveGenerica::verificaColisao(&np, &ni2))){
-			np.setCoord(xci, yci);			
+		if (naveGenerica::verificaColisaoGeral(&np, naves, 2)){
+			np.setCoord(xci, yci);
 		}
+		
 		//np.colisaoTela(telaX,telaY);
 
 		// Redesenha o quadrado com as novas coordenadas 
