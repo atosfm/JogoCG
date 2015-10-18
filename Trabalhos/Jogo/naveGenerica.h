@@ -1,7 +1,7 @@
 #include <gl/glut.h>
 #include <fstream>
 #include <string>
-using namespace std;
+
 
 #pragma once	/* Evita o erro de vários includes iguais sendo chamados num mesmo arquivo
 				na hora de compilar.*/
@@ -70,19 +70,23 @@ public:
 	int getHP(){
 		return HP;
 	}
-	void danoPorColisao(){
+	// Método que seve ser chamado caso haja colisão entre naves para diminuir o HP da nave.
+	void recebeDanoPorColisao(){
 		HP -= danoColisao;
 		if (HP < 0)
 			HP = 0;
 	}
-	void danoPorAtaque(int ataque){
+	// Método que seve ser chamado caso haja colisão entre naves e tiros para diminuir o HP da nave.
+	void recebeDanoPorAtaque(int ataque){
 		HP -= ataque;
 		if (HP < 0)
 			HP = 0;
 	}
+	// Método get do atributo getBoundingBoxA.
 	float getBoundingBoxA(){
 		return boundingBoxA;
 	}
+	// Método get do atributo getBoundingBoxL.
 	float getBoundingBoxL(){
 		return boundingBoxL;
 	}
@@ -99,8 +103,8 @@ public:
 	pontosR[][2] = Matriz de pontos que definem todos os quadriláteros do modelo.
 	corR[][3]	 = Matriz de pontos que definem as cores dos quadriláteros do modelo.
 	//*/
-	void readFileVertices(string filePath, float pontosT[][2], GLfloat corT[][3], float pontosR[][2], GLfloat corR[][3]){		
-		ifstream file(filePath);
+	void readFileVertices(std::string filePath, float pontosT[][2], GLfloat corT[][3], float pontosR[][2], GLfloat corR[][3]){
+		std::ifstream file(filePath);
 		char ch;
 		ct = 0; pt = 0; cr = 0; pr = 0;
 		while (file >> ch){
@@ -133,8 +137,8 @@ public:
 	pontosR[][2] = Matriz de pontos que definem todos os quadriláteros do modelo.
 	corR[][3]	 = Matriz de pontos que definem as cores dos quadriláteros do modelo.
 	*/
-	void readFileVertices(string filePath, float pontosR[][2], GLfloat corR[][3]){
-		ifstream file(filePath);
+	void readFileVertices(std::string filePath, float pontosR[][2], GLfloat corR[][3]){
+		std::ifstream file(filePath);
 		char ch;
 		cr = 0; pr = 0;
 		while (file >> ch){
@@ -170,7 +174,12 @@ public:
 				yc = 0;
 		}
 	}
-	/* Método que desenha o modelo usando triângulos e quadriláteros.*/
+	/* Método que desenha o modelo usando triângulos e quadriláteros.
+	pontosT[][2] = Matriz de pontos que definem todos os triângulos do modelo.
+	corT[][3]	 = Matriz de pontos que definem as cores dos triângulos do modelo.
+	pontosR[][2] = Matriz de pontos que definem todos os quadriláteros do modelo.
+	corR[][3]	 = Matriz de pontos que definem as cores dos quadriláteros do modelo.
+	*/
 	void desenhaGenerico(float pontosT[][2], GLfloat corT[][3], float pontosR[][2], GLfloat corR[][3]){
 		glPushMatrix();
 		int aux = 0;
@@ -201,7 +210,10 @@ public:
 	//*/
 
 
-	// Método que desenha o modelo usando quadriláteros.
+	/* Método que desenha o modelo usando quadriláteros.
+	pontosR[][2] = Matriz de pontos que definem todos os quadriláteros do modelo.
+	corR[][3]	 = Matriz de pontos que definem as cores dos quadriláteros do modelo.
+	*/
 	void desenhaGenerico(float pontosR[][2], GLfloat corR[][3]){
 		glPushMatrix();		
 
@@ -234,9 +246,11 @@ public:
 		}
 	}
 	// Método que verifica a colisão entre inúmeros objetos
-	// *n1 - Ponteiro que aponta para um Objeto qualquer que herde ou seja da classe naveGenerica
-	static bool verificaColisaoGeral(naveGenerica *n1, naveGenerica naves[], int nIndices){		
-		for (int x = 0; x < nIndices; x++){			
+	//	*n1 - Ponteiro que aponta para um Objeto qualquer que herde ou seja da classe naveGenerica
+	//	naves[] - Vetor de naves presentes na tela.
+	//	nNaves - Número de naves presentes na tela.
+	static bool verificaColisaoGeral(naveGenerica *n1, naveGenerica naves[], int nNaves){		
+		for (int x = 0; x < nNaves; x++){
 			if (verificaColisao(n1, &naves[x])){
 				return true;
 			}

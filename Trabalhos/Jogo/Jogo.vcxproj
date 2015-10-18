@@ -84,11 +84,20 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Header.h" />
     <ClInclude Include="principal.h" />
     <ClInclude Include="naveGenerica.h" />
     <ClInclude Include="naveInimiga1.h" />
     <ClInclude Include="naveInimiga2.h" />
     <ClInclude Include="navePrincipal.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="tiroSimples.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="modelos\naveInimiga1.txt" />
+    <Text Include="modelos\naveInimiga2.txt" />
+    <Text Include="modelos\navePrincipal.txt" />
+    <Text Include="modelos\tiroSimples.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

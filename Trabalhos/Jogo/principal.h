@@ -1,13 +1,12 @@
 #include <math.h>
-#include "naveGenerica.h"
 #include "navePrincipal.h"
 #include "naveinimiga1.h"
 #include "naveinimiga2.h"
-using namespace std;
 
-const string caminhoNP = "modelos/navePrincipal.txt";
-const string caminhoNI1 = "modelos/naveInimiga1.txt";
-const string caminhoNI2 = "modelos/naveInimiga2.txt";
+
+const std::string caminhoNP = "modelos/navePrincipal.txt";
+const std::string caminhoNI1 = "modelos/naveInimiga1.txt";
+const std::string caminhoNI2 = "modelos/naveInimiga2.txt";
 
 class principal {
 protected:
@@ -18,6 +17,7 @@ protected:
 	GLfloat telaY = 15.0f;		// Valor máximo atingido pela coordenada x. O valor mínimo é 0.
 	GLfloat stepX = 0.1f;		// Acréscimo no atributo xc quando a nave se movimento no eixo x.
 	GLfloat stepY = 0.1f;		// Acréscimo no atributo yc quando a nave se movimento no eixo y.
+	
 	int windowWidth = 800;		// Largura da tela
 	int windowHeight = 600;		// Altura da tela
 	bool fullscreenON = false;	// Indica se o fullscreen está ou não ativado
@@ -31,8 +31,8 @@ protected:
 public:
 	principal()
 	{
-		telaX = 15.0f;
-		telaY = 15.0f;
+		telaX = 10.0f;
+		telaY = 10.0f;
 		stepX = 0.1f;
 		stepY = 0.1f;
 		windowWidth = 800;
@@ -83,7 +83,7 @@ public:
 				fullscreenON = true;
 			}
 			break;
-		case  27:   // ESC
+		case 27:   // ESC
 			exit(0);
 		case 13: // Enter
 			break;
@@ -93,50 +93,25 @@ public:
 			np.setCoord(xci, yci);
 		}
 		
-		//np.colisaoTela(telaX,telaY);
+		np.colisaoTela(telaX,telaY);
 
 		// Redesenha o quadrado com as novas coordenadas 
 		glutPostRedisplay();
 	}
-	void movimentaNave(int k, GLfloat telaX, GLfloat telaY){
-		GLfloat xc = np.getXC();
-		GLfloat yc = np.getYC();
-		switch (k)
-		{
-		case GLUT_KEY_UP:
-			yc += stepY;
-			break;
-		case GLUT_KEY_DOWN:
-			yc -= stepY;
-			break;
-		case GLUT_KEY_LEFT:
-			xc -= stepX;
-			break;
-		case GLUT_KEY_RIGHT:
-			xc += stepX;
-			break;
-		}
-		np.colisaoTela(telaX, telaY);
-		if  ( (naveGenerica::verificaColisao(&np, &ni1))){
-			np.setCoord(xc, yc);
-			
-			glutPostRedisplay();
-		}
-		
-	}
+	
 
 	void pressionaSetas(int k){
-		movimentaNave(k, telaX, telaY);
+		np.movimentaNave(k, telaX, telaY,naves,2);
 	}
 	/* Desenha a função*/
 	void desenhaTela()
 	{
-		glClearColor(0, 0.5, 0.5, 0);
+		glClearColor(stepX, 0.5, 0.5, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		np.colisaoTela(telaX, telaY);
+		//np.colisaoTela(telaX, telaY);
 		np.desenha();
 		ni1.desenha();
 		ni2.desenha();

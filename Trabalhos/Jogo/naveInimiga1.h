@@ -1,5 +1,5 @@
 #include "naveGenerica.h"
-using namespace std;
+
 
 #pragma once
 class naveInimiga1 : public naveGenerica
@@ -12,7 +12,7 @@ private:
 public:
 	naveInimiga1(){}
 	// Construtor da classe
-	naveInimiga1(string filePath) : naveGenerica(){
+	naveInimiga1(std::string filePath) : naveGenerica(){
 		stepX = 0.2f;
 		stepY = 0.2f;
 		xc = 4;
@@ -21,7 +21,7 @@ public:
 
 	}
 	// Método que lê o arquivo do modelo.
-	void carregaMatrizes(string filePath){
+	void carregaMatrizes(std::string filePath){
 		readFileVertices(filePath, pontosR, corR);
 	}
 	// Chama o método genérico de desenhar

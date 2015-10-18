@@ -35,5 +35,28 @@
     <ClInclude Include="principal.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tiroSimples.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="modelos\naveInimiga1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="modelos\naveInimiga2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="modelos\navePrincipal.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="modelos\tiroSimples.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

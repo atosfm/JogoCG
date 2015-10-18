@@ -1,5 +1,5 @@
 #include "naveGenerica.h"
-using namespace std;
+
 
 #pragma once/* Evita o erro de vários includes iguais sendo chamados num mesmo arquivo
 				na hora de compilar.*/
@@ -18,7 +18,7 @@ protected:
 public:
 	naveInimiga2(){}
 	// Construtor da classe
-	naveInimiga2(string filePath) : naveGenerica(){
+	naveInimiga2(std::string filePath) : naveGenerica(){
 		stepY = 0.1f;
 		stepX = 0.1f;
 		xc = 3;
@@ -26,7 +26,7 @@ public:
 		carregaMatrizes(filePath);
 	}
 	// Método que lê o arquivo do modelo.
-	void carregaMatrizes(string filePath){
+	void carregaMatrizes(std::string filePath){
 		readFileVertices(filePath, pontosT, corT, pontosR, corR);
 	}
 	// Chama o método genérico de desenhar

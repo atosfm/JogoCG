@@ -1,5 +1,5 @@
 #include "naveGenerica.h"
-using namespace std;
+
 
 
 class navePrincipal : public naveGenerica
@@ -16,9 +16,9 @@ private:
 public:
 	navePrincipal(){}
 	// Construtor da classe
-	navePrincipal(string filePath) : naveGenerica(){
-		stepX = 0.2f;
-		stepY = 0.2f;
+	navePrincipal(std::string filePath) : naveGenerica(){
+		stepX = 0.1f;
+		stepY = 0.1f;
 		xc = 0;
 		yc = 0;
 		vidas = 0;
@@ -26,7 +26,7 @@ public:
 	}
 	// Construtor da classe com passagem de parâmetro
 	// x = xc, y = yc, b = boundingBox, h = HP, v = vidas, filePath = Caminho do arquivo
-	navePrincipal(float x, float y, float ba, float bl, int h, int v, string filePath) : naveGenerica(){
+	navePrincipal(float x, float y, float ba, float bl, int h, int v, std::string filePath) : naveGenerica(){
 		xc = x;
 		yc = y;
 		boundingBoxA = ba;
@@ -46,12 +46,42 @@ public:
 	}
 	
 	// Método que lê o arquivo do modelo.
-	void carregaMatrizes(string filePath){
+	void carregaMatrizes(std::string filePath){
 		readFileVertices(filePath, pontosT, corT, pontosR, corR);
 	}
 	// Chama o método genérico de desenhar
 	void desenha(){
 		desenhaGenerico(pontosT, corT, pontosR, corR);
 	}
-	
+	// Método que movimenta a nave pelo pressionamento das setas no teclado.
+	void movimentaNave(int k, GLfloat telaX, GLfloat telaY, naveGenerica naves[], int nIndices){
+		GLfloat xc = getXC();
+		GLfloat yc = getYC();
+		GLfloat xci = xc;
+		GLfloat yci = yc;
+		switch (k)
+		{
+		case GLUT_KEY_UP:
+			yc += stepY;
+			break;
+		case GLUT_KEY_DOWN:
+			yc -= stepY;
+			break;
+		case GLUT_KEY_LEFT:
+			xc -= stepX;
+			break;
+		case GLUT_KEY_RIGHT:
+			xc += stepX;
+			break;
+		}						
+		setCoord(xc, yc);
+		colisaoTela(telaX, telaY);
+		if ( (naveGenerica::verificaColisaoGeral(this, naves, nIndices )) ){
+			setCoord(xci, yci);
+			recebeDanoPorColisao();
+			glutPostRedisplay();
+		}
+		
+
+	}
 };
