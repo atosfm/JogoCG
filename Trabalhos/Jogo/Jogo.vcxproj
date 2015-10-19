@@ -90,7 +90,6 @@
     <ClInclude Include="naveInimiga1.h" />
     <ClInclude Include="naveInimiga2.h" />
     <ClInclude Include="navePrincipal.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="tiroSimples.h" />
   </ItemGroup>
   <ItemGroup>

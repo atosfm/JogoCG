@@ -2,11 +2,13 @@
 #include "navePrincipal.h"
 #include "naveinimiga1.h"
 #include "naveinimiga2.h"
-
+#include <vector>
 
 const std::string caminhoNP = "modelos/navePrincipal.txt";
 const std::string caminhoNI1 = "modelos/naveInimiga1.txt";
 const std::string caminhoNI2 = "modelos/naveInimiga2.txt";
+typedef std::vector<naveGenerica> Tiros;
+
 
 class principal {
 protected:
@@ -22,7 +24,8 @@ protected:
 	int windowHeight = 600;		// Altura da tela
 	bool fullscreenON = false;	// Indica se o fullscreen está ou não ativado
 	bool anima = false;			// Indica se haverá ou não animação
-	
+	//std::vector<naveGenerica> tiros;
+	Tiros tiros;
 	naveGenerica *n1, *n2,*n3,naves[200];
 	
 	//bool keyStates[256] = { false };	//

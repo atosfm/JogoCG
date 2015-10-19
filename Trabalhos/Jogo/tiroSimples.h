@@ -32,4 +32,7 @@ public:
 	void desenha(){
 		desenhaGenerico(pontosR, corR);
 	}
+	float descreveFuncaoMovimento(){
+
+	}
 };
