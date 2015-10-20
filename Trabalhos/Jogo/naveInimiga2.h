@@ -11,12 +11,15 @@ protected:
 	float pontosT[18][2];	// Matriz de pontos que definem todos os triângulos do modelo.
 	GLfloat corT[6][3];		// Matriz de pontos que definem as cores dos triângulos do modelo.
 	float pontosR[8][2];	// Matriz de pontos que definem todos os quadriláteros do modelo.
-	GLfloat corR[2][3];		// Matriz de pontos que definem as cores dos quadriláteros do modelo.
-
-	float stepX;		// Incremento utilizado para gerar movimento na coordenada x
-	float stepY;		// Incremento utilizado para gerar movimento na coordenada y
+	GLfloat corR[2][3];		// Matriz de pontos que definem as cores dos quadriláteros do modelo.	
 public:
-	naveInimiga2(){}
+	naveInimiga2(){
+		stepY = 0.1f;
+		stepX = 0.1f;
+		xc = 3;
+		yc = 3;
+		carregaMatrizes("modelos/naveInimiga2.txt");
+	}
 	// Construtor da classe
 	naveInimiga2(std::string filePath) : naveGenerica(){
 		stepY = 0.1f;

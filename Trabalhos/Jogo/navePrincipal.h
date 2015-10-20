@@ -1,22 +1,27 @@
-#include "naveGenerica.h"
-
+#include "tiroSimples.h"
+#include<vector>
 
 
 class navePrincipal : public naveGenerica
 {
 private:
-	int vidas;				// Define a quantidade de vidas do jogador.
-	float stepX;		// Acréscimo no atributo xc quando a nave se movimento no eixo x.
-	float stepY;		// Acréscimo no atributo yc quando a nave se movimento no eixo y.
+	int vidas;				// Define a quantidade de vidas do jogador.	
 	float pontosT[21][2];	// Matriz de pontos que definem todos os triângulos do modelo.
 	GLfloat corT[7][3];		// Matriz de pontos que definem as cores dos triângulos do modelo.
 	float pontosR[12][2];	// Matriz de pontos que definem todos os quadriláteros do modelo.
 	GLfloat corR[3][3];		// Matriz de pontos que definem as cores dos quadriláteros do modelo.
-	
+	std::vector<tiroSimples> tiro1;	
 public:
-	navePrincipal(){}
+	navePrincipal(){		
+		stepX = 0.1f;
+		stepY = 0.1f;
+		xc = 0;
+		yc = 0;
+		vidas = 0;
+		carregaMatrizes("modelos/navePrincipal.txt");
+	}
 	// Construtor da classe
-	navePrincipal(std::string filePath) : naveGenerica(){
+	navePrincipal(std::string filePath) : naveGenerica(){		
 		stepX = 0.1f;
 		stepY = 0.1f;
 		xc = 0;
@@ -84,4 +89,53 @@ public:
 		
 
 	}
+	void atirar1(GLfloat telaY){
+		tiroSimples t;
+		t.setCoord(xc + 0.45f, yc + 1.0f);		
+		tiro1.push_back(t);
+		//desenhaTiros();
+
+		/*
+		std::vector<tiroSimples>::iterator i;
+
+		i = tiro1.begin();
+		while (i != tiro1.end()){			
+			i->acrescentaPassoY();
+			i = tiro1.begin() + 1;
+		}
+			
+		//*/
+		//movimentaTiros1(telaY);
+	}
+	void desenhaTiros(){
+		std::vector<tiroSimples>::iterator i;
+		int n = 1;
+		i = tiro1.begin();
+		while (i != tiro1.end()){
+			i->desenha();
+			i = tiro1.begin() + n;
+			n++;
+		}
+	}
+	//*
+	void movimentaTiros1(GLfloat telaY){
+		std::vector<tiroSimples>::iterator i = tiro1.begin();		
+		int n = tiro1.size();
+		if (n > 0){
+			n = 0;
+			while (i != tiro1.end()){
+				i->acrescentaPassoY();
+				if (i->getYC() > telaY){
+					tiro1.erase(i);
+				}
+				else{
+					n++;
+				}
+				i = tiro1.begin() + n;
+			}
+		}
+		
+				
+	}
+	//*/
 };

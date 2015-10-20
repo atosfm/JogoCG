@@ -17,6 +17,8 @@ protected:
 	int cr;				// Quantidade de cores para desenhar quadriláteros
 	int pr;				// Quantidade de pontos para desenhar quadriláteros
 	int danoColisao;	// Quantidade de dano causado por uma colisão
+	float stepX;		// Incremento utilizado para gerar movimento na coordenada x
+	float stepY;		// Incremento utilizado para gerar movimento na coordenada y
 public:
 	// Construtor da classe sem passagem de parâmetro.
 	// Define a coordenada de centro como (xc,yc) = (0,0), boundingBox = 1 e HP = 100.
@@ -89,6 +91,9 @@ public:
 	// Método get do atributo getBoundingBoxL.
 	float getBoundingBoxL(){
 		return boundingBoxL;
+	}
+	void acrescentaPassoY(){
+		yc += stepY;
 	}
 	/*Função que descreve o movimento de uma nave. Recebe como parâmetro uma função que retorna um float.
 	Deve ser implementada pelos inimigos. Recebe a cordenada xc como parâmetro e calcula a coordenada yc*/

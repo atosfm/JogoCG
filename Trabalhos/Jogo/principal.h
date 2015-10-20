@@ -4,9 +4,6 @@
 #include "naveinimiga2.h"
 #include <vector>
 
-const std::string caminhoNP = "modelos/navePrincipal.txt";
-const std::string caminhoNI1 = "modelos/naveInimiga1.txt";
-const std::string caminhoNI2 = "modelos/naveInimiga2.txt";
 typedef std::vector<naveGenerica> Tiros;
 
 
@@ -15,15 +12,15 @@ protected:
 	navePrincipal np;			// Nave Principal
 	naveInimiga1 ni1;			// Inimigo 1
 	naveInimiga2 ni2;			// Inimigo 2
-	GLfloat telaX = 15.0f;		// Valor máximo atingido pela coordenada x. O valor mínimo é 0.
-	GLfloat telaY = 15.0f;		// Valor máximo atingido pela coordenada x. O valor mínimo é 0.
-	GLfloat stepX = 0.1f;		// Acréscimo no atributo xc quando a nave se movimento no eixo x.
-	GLfloat stepY = 0.1f;		// Acréscimo no atributo yc quando a nave se movimento no eixo y.
+	GLfloat telaX;		// Valor máximo atingido pela coordenada x. O valor mínimo é 0.
+	GLfloat telaY;		// Valor máximo atingido pela coordenada x. O valor mínimo é 0.
+	GLfloat stepX;		// Acréscimo no atributo xc quando a nave se movimento no eixo x.
+	GLfloat stepY;		// Acréscimo no atributo yc quando a nave se movimento no eixo y.
 	
-	int windowWidth = 800;		// Largura da tela
-	int windowHeight = 600;		// Altura da tela
-	bool fullscreenON = false;	// Indica se o fullscreen está ou não ativado
-	bool anima = false;			// Indica se haverá ou não animação
+	int windowWidth;		// Largura da tela
+	int windowHeight;		// Altura da tela
+	bool fullscreenON;	// Indica se o fullscreen está ou não ativado
+	bool anima;			// Indica se haverá ou não animação
 	//std::vector<naveGenerica> tiros;
 	Tiros tiros;
 	naveGenerica *n1, *n2,*n3,naves[200];
@@ -39,19 +36,11 @@ public:
 		stepX = 0.1f;
 		stepY = 0.1f;
 		windowWidth = 800;
-		windowHeight = 600;		
-		navePrincipal n(caminhoNP);
-		naveInimiga1 ini(caminhoNI1);
-		naveInimiga2 ini2(caminhoNI2);
-		np = n;
-		ni1 = ini;
-		ni2 = ini2;
-		naves[0] = ini;
-		naves[1] = ini2;
-		n1 = &n;
-		n2 = &ini;
-		n3 = &ini2;
-
+		windowHeight = 600;			
+		naves[0] = ni1;
+		naves[1] = ni2;
+		fullscreenON = false;
+		anima = false;
 	}
 	void pressionarTecla(unsigned char key){
 		GLfloat xc = np.getXC();
@@ -86,6 +75,9 @@ public:
 				fullscreenON = true;
 			}
 			break;
+		case 32: // space		
+			np.atirar1(telaY);
+			break;
 		case 27:   // ESC
 			exit(0);
 		case 13: // Enter
@@ -116,6 +108,8 @@ public:
 		
 		//np.colisaoTela(telaX, telaY);
 		np.desenha();
+		np.desenhaTiros();
+		//np.movimentaTiros1(telaY);
 		ni1.desenha();
 		ni2.desenha();
 
@@ -131,19 +125,9 @@ public:
 	{
 		return sin(x);
 	}
-	void animacaoInicial(){
-		GLfloat xc = np.getXC();			//
-		GLfloat yc = np.getYC();
-		if (xc < telaX - 1 && (!anima)){
-			xc += stepX;
-			yc += func(xc);
-		}
-		else
-		{
-			anima = true;
-		}
-		np.setCoord(xc, yc);
-		//np.colisaoTela(telaX,telaY);
+	void animacoes(){
+		np.desenhaTiros();
+		np.movimentaTiros1(telaY);
 		glutPostRedisplay();
 	}
 	void iniciaTela(int argc, char **argv){
@@ -197,7 +181,7 @@ void reshape(int w, int h)
 
 void Timer(int value)
 {	
-	//p.animacaoInicial();
+	p.animacoes();
 	glutTimerFunc(33, Timer, 1);
 }
 
@@ -209,7 +193,7 @@ void IniciaJogo(int argc, char **argv)
 	glutKeyboardFunc(keyboardDown);
 	glutSpecialFunc(keyboardSpecialDown);
 	glutReshapeFunc(reshape);
-	//glutTimerFunc(33, Timer, 1);
+	glutTimerFunc(33, Timer, 1);
 	glutIdleFunc(idle);
 
 
