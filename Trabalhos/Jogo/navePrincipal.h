@@ -82,8 +82,7 @@ public:
 		setCoord(xc, yc);
 		colisaoTela(telaX, telaY);
 		if ( (naveGenerica::verificaColisaoGeral(this, naves, nIndices )) ){
-			setCoord(xci, yci);
-			recebeDanoPorColisao();
+			setCoord(xci, yci);			
 			glutPostRedisplay();
 		}
 		

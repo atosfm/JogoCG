@@ -257,11 +257,11 @@ public:
 			return false;
 		}
 		else{
-			n1->recebeDanoPorColisao(n2->getDanoColisao);	// Caso seja uma colisão entre naves, cada nave recebe dano 1, senão, não haverá dano por colisão.
-			n2->recebeDanoPorColisao(n1->getDanoColisao);
+			n1->recebeDanoPorColisao(n2->getDanoColisao());	// Caso seja uma colisão entre naves, cada nave recebe dano 1, senão, não haverá dano por colisão.
+			n2->recebeDanoPorColisao(n1->getDanoColisao());
 			
-			n1->recebeDanoPorAtaque(n2->getDanoAtaque);		// Caso seja uma colisão entre uma nave e um tiro, a nave recebe o dano do tiro, senão, não haverá dano por ataque.				
-			n2->recebeDanoPorAtaque(n1->getDanoAtaque);		
+			n1->recebeDanoPorAtaque(n2->getDanoAtaque());		// Caso seja uma colisão entre uma nave e um tiro, a nave recebe o dano do tiro, senão, não haverá dano por ataque.				
+			n2->recebeDanoPorAtaque(n1->getDanoAtaque());
 			return true;
 		}
 	}
