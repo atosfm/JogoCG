@@ -20,8 +20,7 @@ protected:
 	int windowWidth;		// Largura da tela
 	int windowHeight;		// Altura da tela
 	bool fullscreenON;	// Indica se o fullscreen está ou não ativado
-	bool anima;			// Indica se haverá ou não animação
-	//std::vector<naveGenerica> tiros;
+	bool anima;			// Indica se haverá ou não animação	
 	Tiros tiros;
 	naveGenerica *n1, *n2,*n3,naves[200];
 	
@@ -105,11 +104,10 @@ public:
 		glClear(GL_COLOR_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		
-		//np.colisaoTela(telaX, telaY);
+				
 		np.desenha();
 		np.desenhaTiros();
-		//np.movimentaTiros1(telaY);
+		
 		ni1.desenha();
 		ni2.desenha();
 
@@ -135,16 +133,8 @@ public:
 		glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 		glutInitWindowSize(windowWidth, windowHeight);
 		glutInitWindowPosition(5, 5);
-		glutCreateWindow("Avião2");		
-	}
-	
-	void verificaColisaoGeral(){
-		//verificaColisao(&np, &ni1);
-		//verificaColisao(&np, &ni2);
-		//verificaColisao(n1, n2);
-		//verificaColisao(n1, n3);
-
-	}
+		glutCreateWindow("Incursão no Rio");		
+	}	
 
 };
 

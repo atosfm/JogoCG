@@ -16,8 +16,8 @@ public:
 	naveInimiga2(){
 		stepY = 0.1f;
 		stepX = 0.1f;
-		xc = 3;
-		yc = 3;
+		xc = 7;
+		yc = 5;
 		carregaMatrizes("modelos/naveInimiga2.txt");
 	}
 	// Construtor da classe

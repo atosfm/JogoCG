@@ -12,7 +12,7 @@ public:
 		stepX = 0.2f;
 		stepY = 0.2f;
 		xc = 4;
-		yc = 1;
+		yc = 4;
 		carregaMatrizes("modelos/naveInimiga1.txt");
 	}
 	// Construtor da classe
