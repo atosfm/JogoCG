@@ -182,7 +182,7 @@ void reshape(int w, int h)
 void Timer(int value)
 {	
 	p.animacoes();
-	glutTimerFunc(33, Timer, 1);
+	glutTimerFunc(60, Timer, 1);
 }
 
 void IniciaJogo(int argc, char **argv)
@@ -193,7 +193,7 @@ void IniciaJogo(int argc, char **argv)
 	glutKeyboardFunc(keyboardDown);
 	glutSpecialFunc(keyboardSpecialDown);
 	glutReshapeFunc(reshape);
-	glutTimerFunc(33, Timer, 1);
+	glutTimerFunc(60, Timer, 1);
 	glutIdleFunc(idle);
 
 

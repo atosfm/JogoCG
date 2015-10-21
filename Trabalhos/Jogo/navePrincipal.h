@@ -17,7 +17,7 @@ public:
 		stepY = 0.1f;
 		xc = 0;
 		yc = 0;
-		vidas = 0;
+		vidas = 5;
 		carregaMatrizes("modelos/navePrincipal.txt");
 	}
 	// Construtor da classe
@@ -26,7 +26,7 @@ public:
 		stepY = 0.1f;
 		xc = 0;
 		yc = 0;
-		vidas = 0;
+		vidas = 5;
 		carregaMatrizes(filePath);
 	}
 	// Construtor da classe com passagem de parâmetro
@@ -136,6 +136,9 @@ public:
 		}
 		
 				
+	}
+	void colisaoTiros1(){
+
 	}
 	//*/
 };

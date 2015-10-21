@@ -24,8 +24,8 @@ public:
 	// Construtor da classe
 	tiroSimples(std::string filePath) : naveGenerica(){
 		HP = 1;
-		stepY = 0.5f;
-		stepX = 0.5f;
+		stepY = 0.1f;
+		stepX = 0.1f;
 		boundingBoxL = 0.1f;
 		boundingBoxA = 0.1f;
 		carregaMatrizes(filePath);

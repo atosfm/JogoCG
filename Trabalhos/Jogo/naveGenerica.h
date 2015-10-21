@@ -16,7 +16,8 @@ protected:
 	int pt;				// Quantidade de pontos para desenhar triângulos
 	int cr;				// Quantidade de cores para desenhar quadriláteros
 	int pr;				// Quantidade de pontos para desenhar quadriláteros
-	int danoColisao;	// Quantidade de dano causado por uma colisão
+	int danoColisao;	// Quantidade de dano causado por uma colisão.  Deve possuir valor 0 em todas as classes que forem tiros.
+	int danoAtaque;		// Quantidade de dano causado por um ataque. Deve possuir valor 0 em todas as classes que não forem tiros.
 	float stepX;		// Incremento utilizado para gerar movimento na coordenada x
 	float stepY;		// Incremento utilizado para gerar movimento na coordenada y
 public:
@@ -32,6 +33,7 @@ public:
 		boundingBoxA = 1;
 		boundingBoxL = 1;
 		danoColisao = 1;
+		danoAtaque = 0;
 		HP = 100;
 	}
 	// Construtor da classe com passagem de parâmetro
@@ -72,9 +74,17 @@ public:
 	int getHP(){
 		return HP;
 	}
+	// Método get do atributo danoColisao. 
+	int getDanoColisao(){
+		return danoColisao;
+	}
+	// Método get do atributo danoAtaque. 
+	int getDanoAtaque(){
+		return danoAtaque;
+	}
 	// Método que seve ser chamado caso haja colisão entre naves para diminuir o HP da nave.
-	void recebeDanoPorColisao(){
-		HP -= danoColisao;
+	void recebeDanoPorColisao(int colisao){
+		HP -= colisao;
 		if (HP < 0)
 			HP = 0;
 	}
@@ -247,6 +257,11 @@ public:
 			return false;
 		}
 		else{
+			n1->recebeDanoPorColisao(n2->getDanoColisao);	// Caso seja uma colisão entre naves, cada nave recebe dano 1, senão, não haverá dano por colisão.
+			n2->recebeDanoPorColisao(n1->getDanoColisao);
+			
+			n1->recebeDanoPorAtaque(n2->getDanoAtaque);		// Caso seja uma colisão entre uma nave e um tiro, a nave recebe o dano do tiro, senão, não haverá dano por ataque.				
+			n2->recebeDanoPorAtaque(n1->getDanoAtaque);		
 			return true;
 		}
 	}
